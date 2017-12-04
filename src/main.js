@@ -22,13 +22,19 @@ import Phaser from 'expose-loader?Phaser!phaser-ce/build/custom/phaser-split.js'
  * And render a single sprite so we make sure it works.
  */
 import logo from './assets/logo.png';
-import runningcat from './assets/explosion_opaque.png';
+import runningcat from './assets/cockroach-topview-Sprites.png';
 
-var game = new Phaser.Game(1024, 1024, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1280, 720, Phaser.AUTO, '', { init: init, preload: preload, create: create, update: update });
+
+function init() {
+	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVertically = true;
+}
 
 function preload() {
   game.load.image('logo', logo);
-  game.load.spritesheet('cat', runningcat, 320/5, 320/5, 25);
+  game.load.spritesheet('cat', runningcat, 800/4, 600/2, 8);
 }
 
 function create() {
@@ -38,10 +44,7 @@ function create() {
   var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'cat');
   logo.anchor.setTo(0.5);
 
-  logo.animations.add('funnyfaces', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-  	10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-  	20, 21, 22, 23, 24
-  ]);
+  logo.animations.add('funnyfaces', [0, 1, 2, 3, 4, 5, 6, 7]);
 
   logo.animations.play('funnyfaces', 30, false);
 
@@ -49,12 +52,9 @@ function create() {
   	let logo = game.add.sprite(event.position.x, event.position.y, 'cat');
 	  logo.anchor.setTo(0.5);
 
-	  logo.animations.add('funnyfaces', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-	  	10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-	  	20, 21, 22, 23, 24
-	  ]);
+	  logo.animations.add('funnyfaces', [0, 1, 2, 3, 4, 5, 6, 7]);
 
-	  logo.animations.play('funnyfaces', 30, false);
+	  logo.animations.play('funnyfaces', 16, true);
 
   }, this);
 
