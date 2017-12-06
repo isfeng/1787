@@ -30,7 +30,7 @@ export default class Game extends Phaser.State {
       
       //add a few enemeis..
       this.cockroaches = this.add.group();
-      for(var i = 0; i < 1000; i++) {
+      for(var i = 0; i < 100; i++) {
         var cockroach = new Cockroach(this.game, Math.random() * this.game.width, Math.random() * this.game.height);
         this.cockroaches.add(cockroach);
       }

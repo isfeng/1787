@@ -20,7 +20,7 @@ export default class Cockroach extends Phaser.Sprite {
 
 	  // this.health = { current: 10, max: 10 };
 	  // this.fireposition = { x: 160, y: 100 };
-	  this.scale.set(0.1, 0.1);
+	  this.scale.set(0.5, 0.5);
 	  this.crawlAnimation = this.animations.add("crawl", [0,1,2,3,4,5,6,7]);
 	  // this.crawlAnimation.scale.set(0.1, 0.1);
 	  // this.fireAnimation = this.animations.add("fire", [11,12,13]);
@@ -29,9 +29,11 @@ export default class Cockroach extends Phaser.Sprite {
 	}
 
 	update() {
-		this.y -= Math.random() * 1.2;
-		if(this.y < -20)
+		this.y -= Math.random() * 5;
+		if(this.y < -100)
 			this.y = this.game.world.height;
+
+		this.x -= this.game.rnd.normal() * 1;
 	}
 
 }

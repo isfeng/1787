@@ -6,7 +6,7 @@ export default class Preload {
   }
 
   preload() {
-    this.load.image('loading_bg', '../assets/images/loading_bg.jpg');
+    this.load.image('loading_bg', require('../assets/images/loading_bg.jpg'));
   }
 
   create() {
@@ -22,18 +22,18 @@ export default class Preload {
 
     //do all your loading here
     //this.load.image('player', 'assets/images/player.png'); //width and height of sprite
-    this.load.image('enemy', '../assets/images/enemy.png');
-    this.load.image('explosion', '../assets/images/explosion.png');
+    // this.load.image('enemy', '../assets/images/enemy.png');
+    // this.load.image('explosion', '../assets/images/explosion.png');
 
-    this.load.spritesheet('player', '../assets/images/gunbot.png', 214, 269); //width and height of sprite
-    this.load.image('hexagon', '../assets/images/hexagon_particle.png');
-    this.load.image('bullet', '../assets/images/bullet.png');
-    this.load.image('enemyBullet', '../assets/images/enemyBullet.png');
-    this.load.image('bg', '../assets/images/bg.jpg');
+    // this.load.spritesheet('player', '../assets/images/gunbot.png', 214, 269); //width and height of sprite
+    // this.load.image('hexagon', '../assets/images/hexagon_particle.png');
+    // this.load.image('bullet', '../assets/images/bullet.png');
+    // this.load.image('enemyBullet', '../assets/images/enemyBullet.png');
+    // this.load.image('bg', '../assets/images/bg.jpg');
 
-    this.load.image('health_bar', '../assets/images/health_bar.png');
-    this.load.image('health_holder', '../assets/images/health_holder.png');
-    this.load.image('circle', '../assets/images/circle.png');
+    // this.load.image('health_bar', '../assets/images/health_bar.png');
+    // this.load.image('health_holder', '../assets/images/health_holder.png');
+    // this.load.image('circle', '../assets/images/circle.png');
 
     this.load.spritesheet('cockroach', require('../assets/images/cockroach-topview-Sprites.png'), 200, 300);
 
