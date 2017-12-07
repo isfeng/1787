@@ -13,8 +13,8 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-      this.stage.setBackgroundColor('#FFFFFF');
-      // this.spawnChance = .02;
+      this.stage.setBackgroundColor('#d8d2d3');
+      this.spawnChance = 0.01;
       // this.score = 0;
 
       // this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -29,11 +29,11 @@ export default class Game extends Phaser.State {
       // this.game.add.existing(this.player);
       
       //add a few enemeis..
-      this.cockroaches = this.add.group();
-      for(var i = 0; i < 100; i++) {
-        var cockroach = new Cockroach(this.game, Math.random() * this.game.width, Math.random() * this.game.height);
-        this.cockroaches.add(cockroach);
-      }
+      // this.cockroaches = this.add.group();
+      // for(var i = 0; i < 100; i++) {
+      //   var cockroach = new Cockroach(this.game, Math.random() * this.game.width, Math.random() * this.game.height);
+      //   this.cockroaches.add(cockroach);
+      // }
 
       //add the explosions
       // this.explosions = this.game.add.emitter(0,0, 200);
@@ -47,9 +47,47 @@ export default class Game extends Phaser.State {
       // this.waveTimer = this.game.time.create(false);
       // this.waveTimer.loop(20000, this.incrementWave, this);
       // this.waveTimer.start();
+      // 
+      // this.explosions = this.game.add.emitter(0,0, 200);
+      // this.explosions.makeParticles("hexagon");
+      // this.explosions.setAlpha(1, .2, 2000);
+
+    var LIFECYCLE = 2000;
+    
+    // Create a particle emitter along the bottom of the stage
+    var emitter = this.game.add.emitter(this.game.world.centerX, this.game.height, 50);
+    emitter.width = this.game.width;
+    
+    // Particle behaviour ranges to create a smoke drift-like effect
+    emitter.minParticleScale = 0.1;
+    emitter.maxParticleScale = 0.9;
+    emitter.minRotation = -5;
+    emitter.maxRotation = 5;
+    emitter.setYSpeed(-2, -5);
+    emitter.setXSpeed(10, 20);
+    emitter.gravity = -10;
+    
+    // Particle alpha will ease from 0 to 0.2 and back again, for fade in/out
+    emitter.setAlpha(0, 0.2, LIFECYCLE, Phaser.Easing.Quadratic.OutIn, true);
+    
+    // Start the emitter
+    emitter.makeParticles('smoke');
+    emitter.start(false, LIFECYCLE, 100, 0);
+    
+    // add Snake
+    var snake = this.game.add.sprite(this.game.width * 0.7, 50, 'snake');
+    snake.anchor.setTo(0.5, 0);
+    snake.scale.setTo(0.5);
+    
+    // add GUI
+    // var gui = new dat.GUI();
+    // gui.add(emitter, 'gravity').min(-20).max(20).name('Gravity');
+    // gui.add(emitter, 'maxRotation').min(0).max(20).name('Rotation');
+    // gui.close();
+
   }
   
-  /*
+  
   setupUI() {
     this.UILayer = this.add.group();
 
@@ -61,16 +99,28 @@ export default class Game extends Phaser.State {
   }
 
   update() {
-    this.bg.tilePosition.x -= .5;
+    // this.bg.tilePosition.x -= .5;
 
     if(Math.random() < this.spawnChance) {
-      var enemy = new Enemy(this.game, this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height, this.enemyBullets);
-      this.enemies.add(enemy);
+
+      this.cockroaches = this.add.group();
+      // for(var i = 0; i < 100; i++) {
+        var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
+        this.cockroaches.add(cockroach);
+      // }
+
+      // var enemy = new Enemy(this.game, this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height, this.enemyBullets);
+      // this.enemies.add(enemy);
+      // 
+      // this.explosions.x = cockroach.x;
+      // this.explosions.y = cockroach.y - 250;
+
+      // this.explosions.explode(3000, 10);
     }
 
-    this.physics.arcade.overlap(this.enemies, this.bullets, this.damageEnemy, null, this);
-    this.physics.arcade.overlap(this.player, this.enemies, this.damagePlayer, null, this);
-    this.physics.arcade.overlap(this.player, this.enemyBullets, this.damagePlayer, null, this);
+    // this.physics.arcade.overlap(this.enemies, this.bullets, this.damageEnemy, null, this);
+    // this.physics.arcade.overlap(this.player, this.enemies, this.damagePlayer, null, this);
+    // this.physics.arcade.overlap(this.player, this.enemyBullets, this.damagePlayer, null, this);
   }
 
   incrementWave() {
@@ -100,5 +150,5 @@ export default class Game extends Phaser.State {
       this.score++;
       this.scoreField.setValue(this.score);
   }
-  */
+  
 }

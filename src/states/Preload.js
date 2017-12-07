@@ -12,13 +12,13 @@ export default class Preload {
   create() {
 
     //background for game
-    this.add.sprite(0, 0, "loading_bg");
+    // this.add.sprite(0, 0, "loading_bg");
 
-    this.asset = this.add.sprite(this.game.width/2,this.game.height/2, 'preloader');
-    this.asset.anchor.setTo(0.5, 0.5);
+    // this.asset = this.add.sprite(this.game.width/2,this.game.height/2, 'preloader');
+    // this.asset.anchor.setTo(0.5, 0.5);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-    this.load.setPreloadSprite(this.asset);
+    // this.load.setPreloadSprite(this.asset);
 
     //do all your loading here
     //this.load.image('player', 'assets/images/player.png'); //width and height of sprite
@@ -26,7 +26,7 @@ export default class Preload {
     // this.load.image('explosion', '../assets/images/explosion.png');
 
     // this.load.spritesheet('player', '../assets/images/gunbot.png', 214, 269); //width and height of sprite
-    // this.load.image('hexagon', '../assets/images/hexagon_particle.png');
+    this.load.image('hexagon', require('../assets/images/hexagon_particle.png'));
     // this.load.image('bullet', '../assets/images/bullet.png');
     // this.load.image('enemyBullet', '../assets/images/enemyBullet.png');
     // this.load.image('bg', '../assets/images/bg.jpg');
@@ -37,6 +37,8 @@ export default class Preload {
 
     this.load.spritesheet('cockroach', require('../assets/images/cockroach-topview-Sprites.png'), 200, 300);
 
+    this.load.crossOrigin = 'anonymous';
+    this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
     //staaaart load
     this.load.start();
   }
