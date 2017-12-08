@@ -52,7 +52,7 @@ export default class Game extends Phaser.State {
       // this.explosions.makeParticles("hexagon");
       // this.explosions.setAlpha(1, .2, 2000);
 
-    var LIFECYCLE = 2000;
+    var LIFECYCLE = 6000;
     
     // Create a particle emitter along the bottom of the stage
     var emitter = this.game.add.emitter(this.game.world.centerX, this.game.height, 50);
@@ -68,16 +68,12 @@ export default class Game extends Phaser.State {
     emitter.gravity = -10;
     
     // Particle alpha will ease from 0 to 0.2 and back again, for fade in/out
-    emitter.setAlpha(0, 0.2, LIFECYCLE, Phaser.Easing.Quadratic.OutIn, true);
+    emitter.setAlpha(0, 0.2, LIFECYCLE, Phaser.Easing.Quadratic.InOut, true);
     
     // Start the emitter
     emitter.makeParticles('smoke');
     emitter.start(false, LIFECYCLE, 100, 0);
     
-    // add Snake
-    var snake = this.game.add.sprite(this.game.width * 0.7, 50, 'snake');
-    snake.anchor.setTo(0.5, 0);
-    snake.scale.setTo(0.5);
     
     // add GUI
     // var gui = new dat.GUI();
