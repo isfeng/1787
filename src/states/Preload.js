@@ -1,7 +1,7 @@
 export default class Preload {
 
   constructor() {
-  	this.asset = null;
+    this.asset = null;
     this.ready = false;
   }
 
@@ -26,7 +26,7 @@ export default class Preload {
     // this.load.image('explosion', '../assets/images/explosion.png');
 
     // this.load.spritesheet('player', '../assets/images/gunbot.png', 214, 269); //width and height of sprite
-    this.load.image('hexagon', require('../assets/images/hexagon_particle.png'));
+    this.load.image('hexagon', require('../assets/images/cockroach-egg-200px.png'));
     // this.load.image('bullet', '../assets/images/bullet.png');
     // this.load.image('enemyBullet', '../assets/images/enemyBullet.png');
     // this.load.image('bg', '../assets/images/bg.jpg');
@@ -36,6 +36,10 @@ export default class Preload {
     // this.load.image('circle', '../assets/images/circle.png');
 
     this.load.spritesheet('cockroach', require('../assets/images/cockroach-topview-Sprites.png'), 200, 300);
+    this.load.spritesheet('cockroach-green', require('../assets/images/cockroach-topview-green.png'), 200, 300);
+    this.load.spritesheet('cockroach-lbrown', require('../assets/images/cockroach-topview-Lbrown.png'), 200, 300);
+    this.load.spritesheet('cockroach-purple', require('../assets/images/cockroach-topview-purple.png'), 200, 300);
+    this.load.spritesheet('cockroach-red', require('../assets/images/cockroach-topview-red.png'), 200, 300);
 
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
@@ -45,7 +49,7 @@ export default class Preload {
 
   update() {
 
-    if(this.ready) {
+    if (this.ready) {
       this.game.state.start('game');
     }
 
