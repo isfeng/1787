@@ -40,9 +40,12 @@ export default class Preload {
     this.load.spritesheet('cockroach-lbrown', require('../assets/images/cockroach-topview-Lbrown.png'), 200, 300);
     this.load.spritesheet('cockroach-purple', require('../assets/images/cockroach-topview-purple.png'), 200, 300);
     this.load.spritesheet('cockroach-red', require('../assets/images/cockroach-topview-red.png'), 200, 300);
-
+    this.load.image('cockroach-die', require('../assets/images/cock-die-300.png'));
+    
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
+
+    
     //staaaart load
     this.load.start();
   }

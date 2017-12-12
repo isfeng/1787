@@ -32,9 +32,15 @@ export default class Cockroach extends Phaser.Sprite {
 
     // this.speedX = frac
 
-    this.events.onDragStart.add(this.dragStart);
-    this.events.onDragUpdate.add(this.dragUpdate);
-    this.events.onDragStop.add(this.dragStop);
+    // this.events.onDragStart.add(this.dragStart);
+    // this.events.onDragUpdate.add(this.dragUpdate);
+    // this.events.onDragStop.add(this.dragStop);
+    // this.events.onInputDown.add(this.destroy);
+
+  }
+
+  inputDown() {
+    console.log('inputDown');
   }
 
   dragStart() {
@@ -50,11 +56,13 @@ export default class Cockroach extends Phaser.Sprite {
   }
 
   update() {
-    this.y -= Math.random() * this.frac * 10;
-    if (this.y < -300)
-      this.y = this.game.world.height;
+    // if(this.running){
+      this.y -= Math.random() * this.frac * 10;
+      if (this.y < -300)
+        this.y = this.game.world.height;
 
-    this.x -= this.game.rnd.normal() * 1;
+      this.x -= this.game.rnd.normal() * 1;  
+    // }
   }
 
 }

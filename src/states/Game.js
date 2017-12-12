@@ -16,7 +16,7 @@ export default class Game extends Phaser.State {
     this.game.input.mouse.capture = true;
 
     this.stage.setBackgroundColor('#d8d2d3');
-    this.spawnChance = 0.01;
+    this.spawnChance = 0.11;
     // this.score = 0;
 
     // this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -71,7 +71,7 @@ export default class Game extends Phaser.State {
     emitter.gravity = -10;
 
     // Particle alpha will ease from 0 to 0.2 and back again, for fade in/out
-    emitter.setAlpha(0, 0.2, LIFECYCLE, Phaser.Easing.Quadratic.InOut, true);
+    emitter.setAlpha(0, 0.1, LIFECYCLE, Phaser.Easing.Quadratic.InOut, true);
 
     // Start the emitter
     emitter.makeParticles('smoke');
@@ -108,12 +108,18 @@ export default class Game extends Phaser.State {
       var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 3)]);
       // for(var i = 0; i < 100; i++) {
       // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
-      cockroach.events.onDragUpdate.add(function(sprite, pointer) {
-        this.explosions.x = pointer.x;
-        this.explosions.y = pointer.y;
-        this.explosions.explode(3000, 2);
+      // cockroach.events.onDragUpdate.add(function(sprite, pointer) {
+      //   this.explosions.x = pointer.x;
+      //   this.explosions.y = pointer.y;
+      //   this.explosions.explode(3000, 2);
+      // }, this);
+      cockroach.anchor.setTo(0.5, 0.5);
+      cockroach.events.onInputDown.add(function(sprite, pointer){
+        cockroach.kill();
+        let die = this.game.add.sprite(sprite.x, sprite.y, 'cockroach-die');
+        die.anchor.setTo(0.5, 0.5);
+        this.game.add.tween(die).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
       }, this);
-
       this.cockroaches.add(cockroach);
       // }
 
