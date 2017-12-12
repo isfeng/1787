@@ -33,7 +33,7 @@ export default class Preload {
 
     // this.load.image('health_bar', '../assets/images/health_bar.png');
     // this.load.image('health_holder', '../assets/images/health_holder.png');
-    // this.load.image('circle', '../assets/images/circle.png');
+    this.load.image('circle', require('../assets/images/circle.png'));
 
     this.load.spritesheet('cockroach', require('../assets/images/cockroach-topview-Sprites.png'), 200, 300);
     this.load.spritesheet('cockroach-green', require('../assets/images/cockroach-topview-green.png'), 200, 300);
