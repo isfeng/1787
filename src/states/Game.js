@@ -86,6 +86,8 @@ export default class Game extends Phaser.State {
     // gui.add(emitter, 'maxRotation').min(0).max(20).name('Rotation');
     // gui.close();
     this.online_user = 0;
+    this.cockroaches = this.add.group();
+    this.kills = this.add.group();
   }
 
 
@@ -94,21 +96,22 @@ export default class Game extends Phaser.State {
 
     this.scoreField = new CCU(this.game, "circle", 0);
     this.UILayer.add(this.scoreField);
-
+    this.game.world.bringToTop(this.UILayer);
     // this.healthBar = new HealthBar(this.game, 120, 40, "health_bar", "health_holder");
     // this.UILayer.add(this.healthBar);
   }
 
   update() {
+    this.game.world.bringToTop(this.UILayer);
     // this.bg.tilePosition.x -= .5;
     let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
 
     if (Math.random() < this.spawnChance) {
 
-      this.cockroaches = this.add.group();
+
 
       var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 3)]);
-      this.online_user ++;
+      this.online_user++;
       // for(var i = 0; i < 100; i++) {
       // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
       // cockroach.events.onDragUpdate.add(function(sprite, pointer) {
@@ -118,16 +121,19 @@ export default class Game extends Phaser.State {
       // }, this);
       cockroach.anchor.setTo(0.5, 0.5);
       // cockroach.input.pixelPerfectClick = true
-      cockroach.events.onInputDown.add(function(sprite, pointer){
+      cockroach.events.onInputDown.add(function(sprite, pointer) {
         cockroach.kill();
         let die = this.game.add.sprite(sprite.x, sprite.y, 'cockroach-die');
         die.anchor.setTo(0.5, 0.5);
         die.width = sprite.width;
         die.height = sprite.height;
-        this.game.add.tween(die).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
-        this.online_user --;
+        this.game.add.tween(die).to({
+          alpha: 0
+        }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
+        this.online_user--;
 
       }, this);
+
       this.cockroaches.add(cockroach);
       // }
 
@@ -140,8 +146,8 @@ export default class Game extends Phaser.State {
       // this.explosions.explode(3000, 10);
     }
 
-    this.scoreField.setValue(this.online_user);
-      
+    this.scoreField.setValue(this.cockroaches.countLiving());
+
 
     // this.physics.arcade.overlap(this.enemies, this.bullets, this.damageEnemy, null, this);
     // this.physics.arcade.overlap(this.player, this.enemies, this.damagePlayer, null, this);
