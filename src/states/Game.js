@@ -13,6 +13,8 @@ export default class Game extends Phaser.State {
   }
 
   create() {
+    this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
+    this.game.sound.play('On_the_Bach');
     this.game.input.mouse.capture = true;
     // this.game.input.pixelPerfect = true;
     // this.game.input.pixelPerfectClick = true
@@ -73,7 +75,7 @@ export default class Game extends Phaser.State {
     emitter.gravity = -10;
 
     // Particle alpha will ease from 0 to 0.2 and back again, for fade in/out
-    emitter.setAlpha(0, 0.1, LIFECYCLE, Phaser.Easing.Quadratic.InOut, true);
+    emitter.setAlpha(0, 0.2, LIFECYCLE, Phaser.Easing.Quadratic.InOut, true);
 
     // Start the emitter
     emitter.makeParticles('smoke');
@@ -103,7 +105,8 @@ export default class Game extends Phaser.State {
 
   update() {
     this.game.world.bringToTop(this.UILayer);
-    // this.bg.tilePosition.x -= .5;
+    this.bg.tilePosition.y -= 0.3;
+
     let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
 
     if (Math.random() < this.spawnChance) {
