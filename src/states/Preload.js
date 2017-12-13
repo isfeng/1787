@@ -47,8 +47,10 @@ export default class Preload {
 
     this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.mp3']);
     this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.mp3']);
+    this.game.load.audio('woman-scream-01', ['/sounds/woman-scream-01.mp3']);
     this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.mp3']);
     this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.mp3']);
+    this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.mp3']);
 
     this.load.image('office_02', require('../assets/images/office_02.jpg'));
 

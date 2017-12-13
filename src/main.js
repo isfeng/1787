@@ -8,7 +8,7 @@ import Game from "./states/Game.js";
 import StartScreen from "./states/StartScreen.js";
 
 
-var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'game');
+var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 
 game.state.add('boot', Boot);
 game.state.add('preload', Preload);
