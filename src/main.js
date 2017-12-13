@@ -5,11 +5,13 @@ import Phaser from 'expose-loader?Phaser!phaser-ce/build/custom/phaser-split.js'
 import Boot from "./states/Boot.js";
 import Preload from "./states/Preload.js";
 import Game from "./states/Game.js";
+import StartScreen from "./states/StartScreen.js";
 
 
-var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
+var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'game');
 
 game.state.add('boot', Boot);
 game.state.add('preload', Preload);
+game.state.add('start', StartScreen);
 game.state.add('game', Game);
 game.state.start('boot');

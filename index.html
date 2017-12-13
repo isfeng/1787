@@ -11,11 +11,12 @@
       gtag('config', 'UA-37754878-6');
     </script>
     <style>
-      * {
+      *, body {
         margin: 0;
         padding: 0;
       }
     </style>
+
     <meta charset="utf-8">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 	<!-- IE可能不見得有效 -->
@@ -24,9 +25,14 @@
 	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
     <title>1787</title>
+
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" style="margin:0;padding: 0"></div>
     <script src="/dist/build.js"></script>
+    <script src="/src/lib/phaser-debug.js"></script>
+    <script>
+      avascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+    </script>
   </body>
 </html>

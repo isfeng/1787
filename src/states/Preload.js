@@ -6,7 +6,7 @@ export default class Preload {
   }
 
   preload() {
-    this.load.image('loading_bg', require('../assets/images/loading_bg.jpg'));
+    // this.load.image('loading_bg', require('../assets/images/loading_bg.jpg'));
   }
 
   create() {
@@ -14,11 +14,11 @@ export default class Preload {
     //background for game
     // this.add.sprite(0, 0, "loading_bg");
 
-    // this.asset = this.add.sprite(this.game.width/2,this.game.height/2, 'preloader');
-    // this.asset.anchor.setTo(0.5, 0.5);
+    this.asset = this.add.sprite(this.game.width/2,this.game.height/2, 'preloader');
+    this.asset.anchor.setTo(0.5, 0.5);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-    // this.load.setPreloadSprite(this.asset);
+    this.load.setPreloadSprite(this.asset);
 
     //do all your loading here
     //this.load.image('player', 'assets/images/player.png'); //width and height of sprite
@@ -45,6 +45,14 @@ export default class Preload {
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
 
+    this.game.load.audio('On_the_Bach', ['/music/On_the_Bach.mp3']);
+    this.game.load.audio('Keyboard_Typing_Fast', ['/music/Keyboard_Typing_Fast.mp3']);
+
+    this.load.image('office_02', require('../assets/images/office_02.jpg'));
+
+    this.load.image('sign', require('../assets/images/infoSign.png'));
+
+    this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
     
     //staaaart load
     this.load.start();
@@ -53,7 +61,7 @@ export default class Preload {
   update() {
 
     if (this.ready) {
-      this.game.state.start('game');
+      this.game.state.start('start');
     }
 
   }
