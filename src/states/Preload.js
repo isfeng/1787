@@ -14,7 +14,7 @@ export default class Preload {
     //background for game
     // this.add.sprite(0, 0, "loading_bg");
 
-    this.asset = this.add.sprite(this.game.width/2,this.game.height/2, 'preloader');
+    this.asset = this.add.sprite(this.game.width / 2, this.game.height / 2, 'preloader');
     this.asset.anchor.setTo(0.5, 0.5);
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
@@ -41,19 +41,21 @@ export default class Preload {
     this.load.spritesheet('cockroach-purple', require('../assets/images/cockroach-topview-purple.png'), 200, 300);
     this.load.spritesheet('cockroach-red', require('../assets/images/cockroach-topview-red.png'), 200, 300);
     this.load.image('cockroach-die', require('../assets/images/cock-die-300.png'));
-    
+
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
 
-    this.game.load.audio('On_the_Bach', ['/music/On_the_Bach.mp3']);
-    this.game.load.audio('Keyboard_Typing_Fast', ['/music/Keyboard_Typing_Fast.mp3']);
+    this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.mp3']);
+    this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.mp3']);
+    this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.mp3']);
+    this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.mp3']);
 
     this.load.image('office_02', require('../assets/images/office_02.jpg'));
 
     this.load.image('sign', require('../assets/images/infoSign.png'));
 
     this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
-    
+
     //staaaart load
     this.load.start();
   }

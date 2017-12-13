@@ -15,7 +15,7 @@ export default class Game extends Phaser.State {
   create() {
     this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
     this.game.sound.play('On_the_Bach');
-    this.game.input.mouse.capture = true;
+
     // this.game.input.pixelPerfect = true;
     // this.game.input.pixelPerfectClick = true
 
@@ -125,6 +125,12 @@ export default class Game extends Phaser.State {
       cockroach.anchor.setTo(0.5, 0.5);
       // cockroach.input.pixelPerfectClick = true
       cockroach.events.onInputDown.add(function(sprite, pointer) {
+
+        if (this.game.rnd.integerInRange(0, 1) == 1)
+          this.game.sound.play('man-scream-01');
+        else
+          this.game.sound.play('woman-scream-02');
+
         cockroach.kill();
         let die = this.game.add.sprite(sprite.x, sprite.y, 'cockroach-die');
         die.anchor.setTo(0.5, 0.5);

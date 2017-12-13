@@ -57,11 +57,11 @@ export default class Cockroach extends Phaser.Sprite {
 
   update() {
     // if(this.running){
-      this.y -= Math.random() * this.frac * 10;
-      if (this.y < -300)
-        this.y = this.game.world.height;
+    this.y -= Math.random() * this.frac * 10;
+    if (this.y < -300)
+      this.y = this.game.world.height + 300;
 
-      this.x -= this.game.rnd.normal() * 1;  
+    this.x -= this.game.rnd.normal() * 1;
     // }
   }
 
