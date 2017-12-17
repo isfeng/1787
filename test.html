@@ -1,0 +1,130 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <title>Phaser - Making your first game, part 9</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser-ce/2.9.3/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+
+function preload() {
+
+    game.load.spritesheet('dude', 'src/assets/images/pGGbv.png', 1142/12, 635/4);
+	game.load.spritesheet('spider', 'src/assets/images/spider_giant.png', 4096/32, 1024/8);
+
+}
+
+var player;
+var platforms;
+var cursors;
+
+var stars;
+var score = 0;
+var scoreText;
+
+var spider;
+
+function create() {
+
+    
+	game.stage.setBackgroundColor('#d8d2d3');
+	game.physics.enable(game, Phaser.Physics.ARCADE);
+
+
+    player = game.add.sprite(32, game.world.height - 150, 'dude');
+
+    player.animations.add('face', Phaser.ArrayUtils.numberArray(0, 11), 12, true);
+    player.animations.add('left', Phaser.ArrayUtils.numberArray(12, 23), 12, true);
+    player.animations.add('right', Phaser.ArrayUtils.numberArray(24, 35), 12, true);
+    player.animations.add('back', Phaser.ArrayUtils.numberArray(36, 47), 12, true);
+
+    player.animations.play('face');
+
+    
+    spider = game.add.sprite(300, 300, 'spider', 0);
+    spider.anchor.setTo(0.5,0.5);
+    
+    game.physics.enable(spider, Phaser.Physics.ARCADE);
+
+    createAnimations(0, '_left');
+    createAnimations(32, '_top_left');
+    createAnimations(64, '_top');
+    createAnimations(96, '_top_right');
+    createAnimations(128, '_right');
+    createAnimations(160, '_bottom_right');
+    createAnimations(192, '_bottom');
+    createAnimations(224, '_bottom_left');
+    
+    
+
+    // spider.animations.play('stand315');
+    
+}
+
+function createAnimations(startFrame, direction) {
+    var fps = 16;
+    
+	spider.animations.add('stand' + direction, Phaser.ArrayUtils.numberArray(startFrame, startFrame + 3), fps, true);
+    spider.animations.add('walk' + direction, Phaser.ArrayUtils.numberArray(startFrame + 4, startFrame + 4 + 7 ), fps, true);
+    spider.animations.add('jump' + direction, Phaser.ArrayUtils.numberArray(startFrame + 12, startFrame + 12 + 3), fps, true);
+    spider.animations.add('die' + direction, Phaser.ArrayUtils.numberArray(startFrame + 16, startFrame + 16 + 7), fps, true);
+
+    spider.animations.add('flip' + direction, Phaser.ArrayUtils.numberArray(startFrame + 24, startFrame + 24 + 3), fps, true);
+    spider.animations.add('attack' + direction, Phaser.ArrayUtils.numberArray(startFrame + 28, startFrame + 28 + 3), fps, true);
+
+}
+
+function update() {
+	var rotation = game.physics.arcade.angleToPointer(spider);
+	var deg = Phaser.Math.radToDeg(rotation);
+	console.log(Phaser.Math.radToDeg(rotation));
+	if(deg >= 0 ){
+		if(deg >= 0 && deg < 22.5){
+			spider.animations.play('walk_right');
+		} else if(deg >= 22.5 && deg < 22.5 + 45 * 1){
+			spider.animations.play('walk_bottom_right');
+		} else if(deg >= 45 * 1 + 22.5 && deg < 45 * 2 + 22.5){
+			spider.animations.play('walk_bottom');
+		} else if(deg >= 45 * 2 + 22.5 && deg < 45 * 3 + 22.5){
+			spider.animations.play('walk_bottom_left');
+		} else {
+			spider.animations.play('walk_left');
+		}
+	} else {
+		deg = -deg
+		if(deg >= 0 && deg < 22.5){
+			spider.animations.play('walk_right');
+		} else if(deg >= 22.5 && deg < 22.5 + 45 * 1){
+			spider.animations.play('walk_top_right');
+		} else if(deg >= 45 * 1 + 22.5 && deg < 45 * 2 + 22.5){
+			spider.animations.play('walk_top');
+		} else if(deg >= 45 * 2 + 22.5 && deg < 45 * 3 + 22.5){
+			spider.animations.play('walk_top_left');
+		} else {
+			spider.animations.play('walk_left');
+		} 
+	}
+
+	// spider.rotation = rotation;
+	game.physics.arcade.moveToPointer(spider);	
+}
+
+function collectStar (player, star) {
+	    
+
+}
+
+</script>
+
+</body>
+</html>

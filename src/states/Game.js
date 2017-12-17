@@ -2,6 +2,7 @@
 import Cockroach from "../prefabs/Cockroach.js";
 // import Enemy from "../prefabs/Enemy.js";
 import CCU from "../prefabs/CCU.js";
+import Spider from "../prefabs/Spider.js";
 // import HealthBar from "../prefabs/HealthBar.js";
 
 export default class Game extends Phaser.State {
@@ -13,6 +14,7 @@ export default class Game extends Phaser.State {
   }
 
   create() {
+    this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke']);
     this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
     // this.game.sound.play('On_the_Bach', 1, true);
 
@@ -23,6 +25,7 @@ export default class Game extends Phaser.State {
     this.spawnChance = 0.11;
     // this.score = 0;
 
+    var spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
     // this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // this.bg = this.add.tileSprite(0, 0, 1024, 768, 'bg');
@@ -105,50 +108,59 @@ export default class Game extends Phaser.State {
 
   update() {
     this.game.world.bringToTop(this.UILayer);
-    this.bg.tilePosition.y -= 0.3;
+    this.bg.tilePosition.y -= 0.5;
 
-    let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
+    let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple', 'spider_crawl'];
 
-    if (Math.random() < this.spawnChance) {
+    if (Phaser.Utils.chanceRoll(5)) {
 
 
+      var cockroach = this.cockroaches.getFirstDead();
+      if (cockroach === null || cockroach === undefined) {
+        var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 4)]);
+        this.online_user++;
+        // for(var i = 0; i < 100; i++) {
+        // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
+        // cockroach.events.onDragUpdate.add(function(sprite, pointer) {
+        //   this.explosions.x = pointer.x;
+        //   this.explosions.y = pointer.y;
+        //   this.explosions.explode(3000, 2);
+        // }, this);
+        cockroach.anchor.setTo(0.5, 0.5);
+        // cockroach.input.pixelPerfectClick = true
+        cockroach.events.onInputDown.add(function(sprite, pointer) {
 
-      var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 3)]);
-      this.online_user++;
-      // for(var i = 0; i < 100; i++) {
-      // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
-      // cockroach.events.onDragUpdate.add(function(sprite, pointer) {
-      //   this.explosions.x = pointer.x;
-      //   this.explosions.y = pointer.y;
-      //   this.explosions.explode(3000, 2);
-      // }, this);
-      cockroach.anchor.setTo(0.5, 0.5);
-      // cockroach.input.pixelPerfectClick = true
-      cockroach.events.onInputDown.add(function(sprite, pointer) {
+          let snd = this.game.rnd.integerInRange(0, 3);
+          if (snd == 0)
+            this.game.sound.play('man-scream-01');
+          else if (snd == 1)
+            this.game.sound.play('man-scream-02');
+          else if (snd == 2)
+            this.game.sound.play('woman-scream-01');
+          else
+            this.game.sound.play('woman-scream-02');
 
-        let snd = this.game.rnd.integerInRange(0, 3);
-        if (snd == 0)
-          this.game.sound.play('man-scream-01');
-        else if (snd == 1)
-          this.game.sound.play('man-scream-02');
-        else if (snd == 2)
-          this.game.sound.play('woman-scream-01');
-        else
-          this.game.sound.play('woman-scream-02');
+          cockroach.kill();
+          let die = this.game.add.sprite(sprite.x, sprite.y, 'cockroach-die');
+          die.anchor.setTo(0.5, 0.5);
+          die.width = sprite.width;
+          die.height = sprite.height;
+          let tween = this.game.add.tween(die).to({
+            alpha: 0
+          }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
+          
+          tween.onComplete.add(function(){
+            die.destroy();
+          }, this);
 
-        cockroach.kill();
-        let die = this.game.add.sprite(sprite.x, sprite.y, 'cockroach-die');
-        die.anchor.setTo(0.5, 0.5);
-        die.width = sprite.width;
-        die.height = sprite.height;
-        this.game.add.tween(die).to({
-          alpha: 0
-        }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
-        this.online_user--;
+        }, this);
 
-      }, this);
-
-      this.cockroaches.add(cockroach);
+        this.cockroaches.add(cockroach);
+      } else {
+        cockroach.revive();
+        cockroach.reset(this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height);
+      }
+      
       // }
 
       // var enemy = new Enemy(this.game, this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height, this.enemyBullets);

@@ -7,8 +7,17 @@ import Preload from "./states/Preload.js";
 import Game from "./states/Game.js";
 import StartScreen from "./states/StartScreen.js";
 
+var cfg = {
+    width: 1280,
+    height: 720,
+    multiTexture: true,
+    parent: 'game',
+    enableDebug: false,
+    renderer: Phaser.WEBGL_MULTI,
 
-var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
+};
+var game = new Phaser.Game(cfg);
+game.clearBeforeRender = false;
 
 game.state.add('boot', Boot);
 game.state.add('preload', Preload);

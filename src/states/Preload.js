@@ -40,6 +40,7 @@ export default class Preload {
     this.load.spritesheet('cockroach-lbrown', require('../assets/images/cockroach-topview-Lbrown.png'), 200, 300);
     this.load.spritesheet('cockroach-purple', require('../assets/images/cockroach-topview-purple.png'), 200, 300);
     this.load.spritesheet('cockroach-red', require('../assets/images/cockroach-topview-red.png'), 200, 300);
+    this.load.spritesheet('spider_crawl', require('../assets/images/spider_crawl.png'), 480/4, 740/5);
     this.load.image('cockroach-die', require('../assets/images/cock-die-300.png'));
 
     this.load.crossOrigin = 'anonymous';
@@ -57,6 +58,8 @@ export default class Preload {
     this.load.image('sign', require('../assets/images/infoSign.png'));
 
     this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
+
+    this.load.spritesheet('xxxxx', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
 
     //staaaart load
     this.load.start();
