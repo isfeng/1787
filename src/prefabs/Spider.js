@@ -2,9 +2,9 @@ export default class Spider extends Phaser.Sprite {
 
   constructor(game, x, y) {
 
-    super(game, 200, 200, 'cockroach-die');
+    super(game, x, y, 'spider', 0);
 
-    // this.inputEnabled = true;
+    this.inputEnabled = true;
     // this.input.enableDrag();
     // this.game.physics.enable(this, Phaser.Physics.ARCADE);
     // this.body.drag.x = 35;
@@ -22,7 +22,7 @@ export default class Spider extends Phaser.Sprite {
 
     // this.health = { current: 10, max: 10 };
     // this.fireposition = { x: 160, y: 100 };
-    this.frac = this.game.rnd.frac();
+    // this.frac = this.game.rnd.frac();
     // this.scale.set(this.frac, this.frac);
     // if(type == 'spider_crawl')
     //   this.crawlAnimation = this.animations.add("crawl", Phaser.ArrayUtils.numberArray(0,18));
@@ -39,16 +39,16 @@ export default class Spider extends Phaser.Sprite {
     // this.events.onDragUpdate.add(this.dragUpdate);
     // this.events.onDragStop.add(this.dragStop);
     // this.events.onInputDown.add(this.destroy);
-    // this.createAnimations(0, '_left');
-    // this.createAnimations(32, '_top_left');
-    // this.createAnimations(64, '_top');
-    // this.createAnimations(96, '_top_right');
-    // this.createAnimations(128, '_right');
-    // this.createAnimations(160, '_bottom_right');
-    // this.createAnimations(192, '_bottom');
-    // this.createAnimations(224, '_bottom_left');
+    this.createAnimations(0, '_left');
+    this.createAnimations(32, '_top_left');
+    this.createAnimations(64, '_top');
+    this.createAnimations(96, '_top_right');
+    this.createAnimations(128, '_right');
+    this.createAnimations(160, '_bottom_right');
+    this.createAnimations(192, '_bottom');
+    this.createAnimations(224, '_bottom_left');
 
-    // this.animations.play('walk_top', 1, true);
+    this.animations.play('walk_top', 16, true);
   }
 
   createAnimations(startFrame, direction) {
@@ -64,9 +64,26 @@ export default class Spider extends Phaser.Sprite {
 
   }
 
+  inputDown() {
+    console.log('inputDown');
+  }
+
+  dragStart() {
+    console.log('dragStart');
+  }
+
+  dragUpdate() {
+    console.log('dragUpdate');
+  }
+
+  dragStop() {
+    console.log('dragStop');
+  }
+
   update() {
     // if(this.running){
-    this.y -= Math.random() * this.frac * 10;
+    this.y -= 2;
+
     if (this.y < -300)
       this.y = this.game.world.height + 300;
 

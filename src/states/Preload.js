@@ -59,7 +59,7 @@ export default class Preload {
 
     this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
 
-    this.load.spritesheet('xxxxx', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
+    this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
 
     //staaaart load
     this.load.start();

@@ -25,24 +25,7 @@ export default class Game extends Phaser.State {
     this.spawnChance = 0.11;
     // this.score = 0;
 
-    var spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
     // this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    // this.bg = this.add.tileSprite(0, 0, 1024, 768, 'bg');
-
-    // this.bullets = this.add.group();
-    // this.enemyBullets = this.add.group();
-
-    //add player
-    // this.player = new Player(this.game, 1000, 1000, this.bullets);
-    // this.game.add.existing(this.player);
-
-    //add a few enemeis..
-    // this.cockroaches = this.add.group();
-    // for(var i = 0; i < 100; i++) {
-    //   var cockroach = new Cockroach(this.game, Math.random() * this.game.width, Math.random() * this.game.height);
-    //   this.cockroaches.add(cockroach);
-    // }
 
     //add the explosions
     this.explosions = this.game.add.emitter(0, 0, 50);
@@ -52,15 +35,6 @@ export default class Game extends Phaser.State {
 
     // add UI
     this.setupUI();
-
-    //wave timer
-    // this.waveTimer = this.game.time.create(false);
-    // this.waveTimer.loop(20000, this.incrementWave, this);
-    // this.waveTimer.start();
-    // 
-    // this.explosions = this.game.add.emitter(0,0, 200);
-    // this.explosions.makeParticles("hexagon");
-    // this.explosions.setAlpha(1, .2, 2000);
 
     var LIFECYCLE = 6000;
 
@@ -90,9 +64,8 @@ export default class Game extends Phaser.State {
     // gui.add(emitter, 'gravity').min(-20).max(20).name('Gravity');
     // gui.add(emitter, 'maxRotation').min(0).max(20).name('Rotation');
     // gui.close();
-    this.online_user = 0;
     this.cockroaches = this.add.group();
-    this.kills = this.add.group();
+    this.spiders = this.add.group();
   }
 
 
@@ -114,11 +87,12 @@ export default class Game extends Phaser.State {
 
     if (Phaser.Utils.chanceRoll(5)) {
 
+      var spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
+      this.spiders.add(spider);
 
       var cockroach = this.cockroaches.getFirstDead();
       if (cockroach === null || cockroach === undefined) {
         var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 4)]);
-        this.online_user++;
         // for(var i = 0; i < 100; i++) {
         // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
         // cockroach.events.onDragUpdate.add(function(sprite, pointer) {
