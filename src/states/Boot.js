@@ -4,6 +4,7 @@ export default class Boot {
     this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
     // this.scale.pageAlignHorizontally = true;
     // this.scale.pageAlignVertically = true;
+    this.scale.forceLandscape = true;
 
     this.load.image('preloader', require('../assets/images/loading_bar.png'));
 

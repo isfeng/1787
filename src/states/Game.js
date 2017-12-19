@@ -14,14 +14,15 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-    this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke']);
+    this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown', 
+      'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke', 'spider']);
     this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
     // this.game.sound.play('On_the_Bach', 1, true);
 
     // this.game.input.pixelPerfect = true;
     // this.game.input.pixelPerfectClick = true
 
-    this.stage.setBackgroundColor('#d8d2d3');
+    // this.stage.setBackgroundColor('#d8d2d3');
     this.spawnChance = 0.11;
     // this.score = 0;
 
@@ -66,6 +67,13 @@ export default class Game extends Phaser.State {
     // gui.close();
     this.cockroaches = this.add.group();
     this.spiders = this.add.group();
+
+    var looping = this.game.time.events.loop(2000, function(){
+      let spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
+      this.spiders.add(spider);
+    }, this);
+    
+
   }
 
 
@@ -83,16 +91,14 @@ export default class Game extends Phaser.State {
     this.game.world.bringToTop(this.UILayer);
     this.bg.tilePosition.y -= 0.5;
 
-    let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple', 'spider_crawl'];
+    let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
 
-    if (Phaser.Utils.chanceRoll(5)) {
+    if (Phaser.Utils.chanceRoll(4)) {
 
-      var spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
-      this.spiders.add(spider);
-
+      
       var cockroach = this.cockroaches.getFirstDead();
       if (cockroach === null || cockroach === undefined) {
-        var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 4)]);
+        var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 3)]);
         // for(var i = 0; i < 100; i++) {
         // var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200);
         // cockroach.events.onDragUpdate.add(function(sprite, pointer) {

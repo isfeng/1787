@@ -52,14 +52,21 @@ export default class Preload {
     this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.mp3']);
     this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.mp3']);
     this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.mp3']);
+    this.game.load.audio('fart-01', ['/sounds/fart-01.mp3']);
+    this.game.load.audio('fart-03', ['/sounds/fart-03.mp3']);
 
-    this.load.image('office_02', require('../assets/images/office_02.jpg'));
+    this.load.image('office_02', require('../assets/images/office_01.jpg'));
 
     this.load.image('sign', require('../assets/images/infoSign.png'));
 
     this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
 
     this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
+
+    this.game.load.atlasJSONHash('medal', require('../assets/images/medal.png'), '/src/assets/images/medal.json');
+
+    this.game.load.spritesheet('dude', require('../assets/images/pGGbv.png'), 1142/12, 635/4);
+
 
     //staaaart load
     this.load.start();

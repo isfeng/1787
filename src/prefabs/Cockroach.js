@@ -5,7 +5,7 @@ export default class Cockroach extends Phaser.Sprite {
     super(game, x, y, type, 0);
 
     this.inputEnabled = true;
-    this.input.enableDrag();
+    // this.input.enableDrag();
     // this.game.physics.enable(this, Phaser.Physics.ARCADE);
     // this.body.drag.x = 35;
     // this.body.drag.y = 35;
@@ -23,6 +23,7 @@ export default class Cockroach extends Phaser.Sprite {
     // this.health = { current: 10, max: 10 };
     // this.fireposition = { x: 160, y: 100 };
     this.frac = this.game.rnd.frac();
+    
     this.scale.set(this.frac, this.frac);
     this.crawlAnimation = this.animations.add("crawl", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
     // this.crawlAnimation.scale.set(0.1, 0.1);
@@ -36,28 +37,33 @@ export default class Cockroach extends Phaser.Sprite {
     // this.events.onDragUpdate.add(this.dragUpdate);
     // this.events.onDragStop.add(this.dragStop);
     // this.events.onInputDown.add(this.destroy);
+    // 
+    
 
   }
 
-  inputDown() {
-    console.log('inputDown');
-  }
+  // inputDown() {
+  //   console.log('inputDown');
+  // }
 
-  dragStart() {
-    console.log('dragStart');
-  }
+  // dragStart() {
+  //   console.log('dragStart');
+  // }
 
-  dragUpdate() {
-    console.log('dragUpdate');
-  }
+  // dragUpdate() {
+  //   console.log('dragUpdate');
+  // }
 
-  dragStop() {
-    console.log('dragStop');
-  }
+  // dragStop() {
+  //   console.log('dragStop');
+  // }
 
   update() {
     // if(this.running){
-    this.y -= Math.random() * this.frac * 10;
+    if(this.frac > 0.3)
+      this.y -= Math.random() * this.frac * 10;
+    else
+      this.y -= Math.random() * 10;
     if (this.y < -300)
       this.y = this.game.world.height + 300;
 

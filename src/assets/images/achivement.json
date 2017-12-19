@@ -1,0 +1,20 @@
+{"frames": {
+
+"spider_giant.png":
+{
+	"frame": {"x":1,"y":1,"w":4040,"h":997},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":22,"w":4040,"h":997},
+	"sourceSize": {"w":4096,"h":1024}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "achivement-0.png",
+	"format": "RGBA8888",
+	"size": {"w":4042,"h":999},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:29e2003d04a842b7d9d93a358461a384:ed340a6b2b52813f3852596e0390aa94:0e2ac5690791dbb3852b84fdd7a6fd01$"
+}
+}

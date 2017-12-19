@@ -49,6 +49,14 @@ export default class Spider extends Phaser.Sprite {
     this.createAnimations(224, '_bottom_left');
 
     this.animations.play('walk_top', 16, true);
+
+    this.events.onInputDown.add(function(sprite, pointer) {
+      let snd = this.game.rnd.integerInRange(0, 1);
+      if (snd == 0)
+        this.game.sound.play('fart-01');
+      else
+        this.game.sound.play('fart-03');
+    }, this);
   }
 
   createAnimations(startFrame, direction) {
@@ -85,7 +93,7 @@ export default class Spider extends Phaser.Sprite {
     this.y -= 2;
 
     if (this.y < -300)
-      this.y = this.game.world.height + 300;
+      this.y = this.game.world.height + 200;
 
     this.x -= this.game.rnd.normal() * 1;
     // }

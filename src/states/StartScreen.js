@@ -1,18 +1,42 @@
-export default class StartScreen {
+export default class StartScreen extends Phaser.State{
 
+  constructor() {
+    //object level properties
+    super();
+
+  }
 
   create() {
     this.game.sound.play('On_the_Bach', 1, true);
-    let office_02 = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'office_02');
-    office_02.anchor.setTo(0.5);
+    
+   
 
-    let sign = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'sign');
+    this.game.stage.setBackgroundColor('#d8d2d3');
+    let office_02 = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'office_02');
+    office_02.alpha = 0;
+    office_02.anchor.setTo(0.5);
+    office_02.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    office_02.scale.pageAlignHorizontally = true;
+    office_02.scale.pageAlignVertically = true;
+    office_02.scale.forceLandscape = true;
+
+    var t = this.game.add.tween(office_02).to( { alpha: 1 }, 10000, Phaser.Easing.Linear.None, true, 3000);
+    t.onComplete.add(function(){
+      this.game.add.tween(sign).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0);
+    },this);
+
+    let sign = this.game.add.sprite(this.game.world.centerX + 200, this.game.world.centerY + 200, 'sign');
     sign.anchor.setTo(0.5);
+    sign.angle = 16;
+    sign.alpha = 0;
     sign.inputEnabled = true;
     sign.events.onInputDown.add(function(sprite, pointer) {
+      this.emitter.start(false, 5000, 0); 
 
-      this.game.state.start('game');
-
+      // this.game.state.start('game');
+      this.game.add.tween(sign).to( { alpha: 0 }, 6000, Phaser.Easing.Linear.None, true, 0);
+      this.game.add.tween(office_02).to( { alpha: 0 }, 6000, Phaser.Easing.Linear.None, true, 0);
+      var once = this.game.time.events.add(10000, function(){this.game.state.start('game')}, this);
     }, this);
 
     // Create a bitmap for the lightning bolt texture
@@ -28,6 +52,24 @@ export default class StartScreen {
 
     // Trigger lightning on mouse clicks and taps
     this.game.input.onTap.add(this.zap, this);
+
+    
+    this.emitter = this.game.add.emitter(this.game.world.centerX + 80, this.game.world.centerY-20, 500);
+    this.emitter.makeParticles('medal', Phaser.ArrayUtils.numberArray(0, 631));
+    // emitter.setAlpha(min, max, rate, easing, yoyo);
+    
+
+    //To use gravity on the emitter, start the physics system
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.emitter.gravity = 200;
+    
+    this.player = this.game.add.sprite(32, this.game.world.height - 150, 'dude');
+    this.player.animations.add('face', Phaser.ArrayUtils.numberArray(0, 11), 12, true);
+    this.player.animations.add('left', Phaser.ArrayUtils.numberArray(12, 23), 12, true);
+    this.player.animations.add('right', Phaser.ArrayUtils.numberArray(24, 35), 12, true);
+    this.player.animations.add('back', Phaser.ArrayUtils.numberArray(36, 47), 12, true);
+
+    this.player.animations.play('back');
   }
 
   update() {
