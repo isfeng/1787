@@ -8,12 +8,12 @@ import Game from "./states/Game.js";
 import StartScreen from "./states/StartScreen.js";
 
 var cfg = {
-    width: 1280,
-    height: 720,
-    multiTexture: true,
-    parent: 'game',
-    enableDebug: false,
-    renderer: Phaser.WEBGL_MULTI,
+  width: 1280,
+  height: 800,
+  multiTexture: true,
+  parent: 'game',
+  enableDebug: false,
+  renderer: Phaser.WEBGL_MULTI,
 
 };
 var game = new Phaser.Game(cfg);

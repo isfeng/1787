@@ -14,11 +14,12 @@ export default class Game extends Phaser.State {
   }
 
   create() {
-    this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown', 
-      'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke', 'spider']);
+    this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown',
+      'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke', 'spider'
+    ]);
     this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
     this.bg.alpha = 0;
-    this.game.add.tween(this.bg).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0);
+    this.game.add.tween(this.bg).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0);
     // this.game.sound.play('On_the_Bach', 1, true);
 
     // this.game.input.pixelPerfect = true;
@@ -31,10 +32,10 @@ export default class Game extends Phaser.State {
     // this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //add the explosions
-    this.explosions = this.game.add.emitter(0, 0, 50);
-    this.explosions.makeParticles("hexagon");
-    this.explosions.setAlpha(1, .2, 1000);
-    this.explosions.setScale(0.5, 0.5);
+    // this.explosions = this.game.add.emitter(0, 0, 50);
+    // this.explosions.makeParticles("hexagon");
+    // this.explosions.setAlpha(1, .2, 1000);
+    // this.explosions.setScale(0.5, 0.5);
 
     // add UI
     this.setupUI();
@@ -70,12 +71,24 @@ export default class Game extends Phaser.State {
     this.cockroaches = this.add.group();
     this.spiders = this.add.group();
 
-    var looping = this.game.time.events.loop(2000, function(){
+    this.game.time.events.repeat(Phaser.Timer.SECOND * 2, 10, function() {
       let spider = new Spider(this.game, Math.random() * this.game.width, this.game.height + 200);
       this.spiders.add(spider);
-    }, this);
-    
 
+    }, this);
+
+    let thought = [' 不要再寫拉芭樂了 ', ' 沒日沒夜的霉日任務 ', ' 你得到發不完勳獎章 ', ' 你得不到成就 ', ' 公司派我去 GDC 是正確的。呵呵～ ', ' 來公司吃便當真的很重要 ',
+      ' 首頁怎麼開這麼慢 ', ' 種花電信第 200 次弱點掃描...還沒完啊... ', ' 魚蝦蟹海鮮尾牙 ', ' 聖誕活動注意大獎是我的 ', ' 我不平衡報表 ',
+      ' 同上BUG破新高。。。。 ', ' 長得帥又會寫程式真的很難得。。。 ', ' 原來是電腦作弊 ', ' 不要再忘記密碼了，對就是在說你 ', ' 拉霸 - Slot 傻傻分不清楚 ',
+      ' Slot -  斯洛 一樣分不清楚 ', ' 喂 不能登入了 ', ' 喂 儲值有問題 ', ' Batch 跑失敗啊 ', ' 1個新功能 30個BUG ',
+      ' 軍團長自肥系統快要上線 ', ' 沒人發現我就是雜工黃 ', ' 說的一嘴好 Code ', ' 我一向說話都很正經 ', ' 台港泰三國PK ', ' 痛毆星球喔喔喔喔 ',
+      ' 客服回應：這都是自燃雞率 ', ' 客服回應：這都是自燃雞率 ', ' 客服回應：這都是自燃雞率 '
+
+    ];
+
+    this.game.time.events.loop(Phaser.Timer.SECOND * 1.5, function() {
+      this.flyThought(thought[this.game.rnd.integerInRange(0, thought.length)]);
+    }, this);
   }
 
 
@@ -95,9 +108,8 @@ export default class Game extends Phaser.State {
 
     let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
 
-    if (Phaser.Utils.chanceRoll(5)) {
+    if (Math.random() < this.spawnChance) {
 
-      
       var cockroach = this.cockroaches.getFirstDead();
       if (cockroach === null || cockroach === undefined) {
         var cockroach = new Cockroach(this.game, Math.random() * this.game.width, this.game.height + 200, types[this.game.rnd.integerInRange(0, 3)]);
@@ -130,8 +142,8 @@ export default class Game extends Phaser.State {
           let tween = this.game.add.tween(die).to({
             alpha: 0
           }, 1000, Phaser.Easing.Linear.None, true, 0, 0, false);
-          
-          tween.onComplete.add(function(){
+
+          tween.onComplete.add(function() {
             die.destroy();
           }, this);
 
@@ -142,7 +154,7 @@ export default class Game extends Phaser.State {
         cockroach.revive();
         cockroach.reset(this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height);
       }
-      
+
       // }
 
       // var enemy = new Enemy(this.game, this.game.width + 100 + (Math.random() * 400), Math.random() * this.game.height, this.enemyBullets);
@@ -162,32 +174,11 @@ export default class Game extends Phaser.State {
     // this.physics.arcade.overlap(this.player, this.enemyBullets, this.damagePlayer, null, this);
   }
 
-  incrementWave() {
-    this.spawnChance *= 1.2;
-  }
+  flyThought(txt) {
+    var label = this.game.add.text(200, this.game.rnd.integerInRange(100, 500), txt, { fill: '#fff', backgroundColor: '#000' });
+    label.x = -200
+    this.game.add.tween(label).to({ x: 1500 }, 7000, Phaser.Easing.Linear.None, true, 0);
 
-  damagePlayer(playerRef, enemyRef) {
-    this.player.damage(1);
-    this.healthBar.setValue(this.player.health.current / this.player.health.max);
-    enemyRef.kill();
-
-    if (this.player.health.current <= 0) {
-      this.game.state.start('gameOver');
-    }
-  }
-
-  damageEnemy(enemy, bullet) {
-
-    this.explosions.x = enemy.x;
-    this.explosions.y = enemy.y;
-
-    this.explosions.explode(2000, 4);
-
-    enemy.kill();
-    bullet.kill();
-
-    this.score++;
-    this.scoreField.setValue(this.score);
   }
 
 }

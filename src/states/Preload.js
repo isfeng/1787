@@ -26,7 +26,7 @@ export default class Preload {
     // this.load.image('explosion', '../assets/images/explosion.png');
 
     // this.load.spritesheet('player', '../assets/images/gunbot.png', 214, 269); //width and height of sprite
-    this.load.image('hexagon', require('../assets/images/cockroach-egg-200px.png'));
+    // this.load.image('hexagon', require('../assets/images/cockroach-egg-200px.png'));
     // this.load.image('bullet', '../assets/images/bullet.png');
     // this.load.image('enemyBullet', '../assets/images/enemyBullet.png');
     // this.load.image('bg', '../assets/images/bg.jpg');
@@ -40,20 +40,20 @@ export default class Preload {
     this.load.spritesheet('cockroach-lbrown', require('../assets/images/cockroach-topview-Lbrown.png'), 200, 300);
     this.load.spritesheet('cockroach-purple', require('../assets/images/cockroach-topview-purple.png'), 200, 300);
     this.load.spritesheet('cockroach-red', require('../assets/images/cockroach-topview-red.png'), 200, 300);
-    this.load.spritesheet('spider_crawl', require('../assets/images/spider_crawl.png'), 480/4, 740/5);
+    // this.load.spritesheet('spider_crawl', require('../assets/images/spider_crawl.png'), 480 / 4, 740 / 5);
     this.load.image('cockroach-die', require('../assets/images/cock-die-300.png'));
 
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
 
-    this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.mp3']);
-    this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.mp3']);
-    this.game.load.audio('woman-scream-01', ['/sounds/woman-scream-01.mp3']);
-    this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.mp3']);
-    this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.mp3']);
-    this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.mp3']);
-    this.game.load.audio('fart-01', ['/sounds/fart-01.mp3']);
-    this.game.load.audio('fart-03', ['/sounds/fart-03.mp3']);
+    this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.m4a']);
+    // this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.m4a']);
+    this.game.load.audio('woman-scream-01', ['/sounds/woman-scream-01.m4a']);
+    this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.m4a']);
+    this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.m4a']);
+    this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.m4a']);
+    this.game.load.audio('fart-01', ['/sounds/fart-01.m4a']);
+    this.game.load.audio('fart-03', ['/sounds/fart-03.m4a']);
 
     this.load.image('office_02', require('../assets/images/office_01.jpg'));
 
@@ -61,12 +61,12 @@ export default class Preload {
 
     this.load.image('cloud_bg', require('../assets/images/cloud_bg.jpg'));
 
-    this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
+    this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096 / 32, 1024 / 8);
 
     this.game.load.atlasJSONHash('medal', require('../assets/images/medal.png'), '/src/assets/images/medal.json');
-    this.game.load.atlasJSONHash('achivement', require('../assets/images/achivement.png'), '/src/assets/images/achivement.json');
+    // this.game.load.atlasJSONHash('achivement', require('../assets/images/achivement.png'), '/src/assets/images/achivement.json');
 
-    this.game.load.spritesheet('dude', require('../assets/images/pGGbv.png'), 1142/12, 635/4);
+    this.game.load.spritesheet('dude', require('../assets/images/pGGbv.png'), 1142 / 12, 635 / 4);
 
 
     // //  The Google WebFont Loader will look for this object, so create it before loading the script.

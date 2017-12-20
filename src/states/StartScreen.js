@@ -1,16 +1,12 @@
-export default class StartScreen extends Phaser.State {
-  constructor() {
-    //object level properties
-    super();
-  }
+export default class StartScreen {
 
   create() {
     this.game.sound.play('On_the_Bach', 1, true);
-    let achivement_emitter = this.game.add.emitter(150, 30, 500);
-    achivement_emitter.makeParticles('achivement', Phaser.ArrayUtils.numberArray(0, 27));
-    achivement_emitter.gravity = 200;
+    // let achivement_emitter = this.game.add.emitter(150, 30, 500);
+    // achivement_emitter.makeParticles('achivement', Phaser.ArrayUtils.numberArray(0, 27));
+    // achivement_emitter.gravity = 200;
 
-    this.game.stage.setBackgroundColor('#d8d2d3');
+    // this.game.stage.setBackgroundColor('#d8d2d3');
     let office_02 = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'office_02');
     office_02.alpha = 0;
     office_02.anchor.setTo(0.5);
@@ -29,12 +25,12 @@ export default class StartScreen extends Phaser.State {
 
     let sign = this.game.add.sprite(this.game.world.centerX + 200, this.game.world.centerY + 200, 'sign');
     sign.anchor.setTo(0.5);
-    sign.angle = 16;
+    sign.angle = 17;
     sign.alpha = 0;
     sign.inputEnabled = true;
     sign.events.onInputDown.add(function(sprite, pointer) {
 
-      this.medal_emitter.start(false, 5000, 0, 100);
+      // this.medal_emitter.start(false, 5000, 0, 100);
       // this.game.state.start('game');
       this.game.add.tween(sign).to({
         alpha: 0
@@ -48,11 +44,11 @@ export default class StartScreen extends Phaser.State {
         alpha: 0
       }, 5000, Phaser.Easing.Linear.None, true, 0);
 
-      this.game.time.events.add(3000, function() {
-        achivement_emitter.start(false, 3000, 100, 25);
-      }, this);
+      // this.game.time.events.add(3000, function() {
+      //   achivement_emitter.start(false, 3000, 100, 25);
+      // }, this);
 
-      var once = this.game.time.events.add(15000, function() {
+      var once = this.game.time.events.add(6000, function() {
         this.game.state.start('game')
       }, this);
 
@@ -87,11 +83,11 @@ export default class StartScreen extends Phaser.State {
     this.player.animations.add('back', Phaser.ArrayUtils.numberArray(36, 47), 12, true);
     this.player.animations.play('back');
     this.game.add.tween(this.player.scale).to({
-      x: 2.5,
-      y: 2.5
+      x: 3,
+      y: 3
     }, 15000, Phaser.Easing.Linear.None, true);
 
-    this.showText();
+    // this.showText();
   }
 
   update() {
@@ -184,7 +180,11 @@ export default class StartScreen extends Phaser.State {
 
   showText() {
     //Assigned for later use
-    var label = this.game.add.text(200, 200, "我最常玩的就是簽到");
+    var label = this.game.add.text(800, 650, "我最常玩的就是簽到");
+    label.alpha = 0;
+    this.game.add.tween(label).to({
+      alpha: 1
+    }, 6000, Phaser.Easing.Linear.None, true, 6000);
     // label.text = "I'm changing the text inside the label var!";
     //Center the text
     // var txt = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "My Text");
