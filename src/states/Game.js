@@ -17,6 +17,8 @@ export default class Game extends Phaser.State {
     this.game.renderer.setTexturePriority(['cloud_bg', 'cockroach-green', 'cockroach-lbrown', 
       'cockroach-purple', 'cockroach-red', 'cockroach-die', 'smoke', 'spider']);
     this.bg = this.add.tileSprite(0, 0, 2000, 1024, 'cloud_bg');
+    this.bg.alpha = 0;
+    this.game.add.tween(this.bg).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0);
     // this.game.sound.play('On_the_Bach', 1, true);
 
     // this.game.input.pixelPerfect = true;
@@ -93,7 +95,7 @@ export default class Game extends Phaser.State {
 
     let types = ['cockroach-red', 'cockroach-green', 'cockroach-lbrown', 'cockroach-purple'];
 
-    if (Phaser.Utils.chanceRoll(4)) {
+    if (Phaser.Utils.chanceRoll(5)) {
 
       
       var cockroach = this.cockroaches.getFirstDead();

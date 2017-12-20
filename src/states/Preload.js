@@ -64,8 +64,25 @@ export default class Preload {
     this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096/32, 1024/8);
 
     this.game.load.atlasJSONHash('medal', require('../assets/images/medal.png'), '/src/assets/images/medal.json');
+    this.game.load.atlasJSONHash('achivement', require('../assets/images/achivement.png'), '/src/assets/images/achivement.json');
 
     this.game.load.spritesheet('dude', require('../assets/images/pGGbv.png'), 1142/12, 635/4);
+
+
+    // //  The Google WebFont Loader will look for this object, so create it before loading the script.
+    // WebFontConfig = {
+
+    //     //  'active' means all requested fonts have finished loading
+    //     //  We set a 1 second delay before calling 'createText'.
+    //     //  For some reason if we don't the browser cannot render the text the first time it's created.
+    //     active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //     //  The Google Fonts we want to load (specify as many as you like in the array)
+    //     google: {
+    //       families: ['Revalia']
+    //     }
+
+    // };
 
 
     //staaaart load
