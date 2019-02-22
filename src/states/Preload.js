@@ -46,14 +46,14 @@ export default class Preload {
     this.load.crossOrigin = 'anonymous';
     this.load.image('smoke', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/mist1.png');
 
-    this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.m4a']);
-    // this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.m4a']);
-    this.game.load.audio('woman-scream-01', ['/sounds/woman-scream-01.m4a']);
-    this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.m4a']);
-    this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.m4a']);
-    this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.m4a']);
-    this.game.load.audio('fart-01', ['/sounds/fart-01.m4a']);
-    this.game.load.audio('fart-03', ['/sounds/fart-03.m4a']);
+    this.game.load.audio('On_the_Bach', ['/sounds/On_the_Bach.mp3']);
+    // this.game.load.audio('Keyboard_Typing_Fast', ['/sounds/Keyboard_Typing_Fast.mp3']);
+    this.game.load.audio('woman-scream-01', ['/sounds/woman-scream-01.mp3']);
+    this.game.load.audio('woman-scream-02', ['/sounds/woman-scream-02.mp3']);
+    this.game.load.audio('man-scream-01', ['/sounds/man-scream-01.mp3']);
+    this.game.load.audio('man-scream-02', ['/sounds/man-scream-02.mp3']);
+    this.game.load.audio('fart-01', ['/sounds/fart-01.mp3']);
+    this.game.load.audio('fart-03', ['/sounds/fart-03.mp3']);
 
     this.load.image('office_02', require('../assets/images/office_01.jpg'));
 
@@ -63,7 +63,7 @@ export default class Preload {
 
     this.load.spritesheet('spider', require('../assets/images/spider_giant.png'), 4096 / 32, 1024 / 8);
 
-    this.game.load.atlasJSONHash('medal', require('../assets/images/medal.png'), '/src/assets/images/medal.json');
+    // this.game.load.atlasJSONHash('medal', require('../assets/images/medal.png'), '/src/assets/images/medal.json');
     // this.game.load.atlasJSONHash('achivement', require('../assets/images/achivement.png'), '/src/assets/images/achivement.json');
 
     this.game.load.spritesheet('dude', require('../assets/images/pGGbv.png'), 1142 / 12, 635 / 4);
